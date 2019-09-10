@@ -33,21 +33,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App container">
         <Form handleSubmit={this.handleSubmit} />
         <br />
         <hr />
         <br />
-        {this.state.items.map((item, i) => {
-          return (
-            <Item
-              key={i}
-              name={item.name}
-              description={item.description}
-              photo={item.photo}
-            />
-          );
-        })}
+        <div className="row">
+          {this.state.items.map((item, i) => {
+            return (
+              <Item
+                key={i}
+                name={item.name}
+                description={item.description}
+                photo={item.photo}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }

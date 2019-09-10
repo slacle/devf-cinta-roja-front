@@ -4,19 +4,19 @@ class Item extends Component {
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
-        <div>
-          <div>Name</div>
-          <input type="text" name="name" />
+        <div className="form-group">
+          <label>Name</label>
+          <input type="text" className="form-control" name="name" />
         </div>
-        <div>
-          <div>Description</div>
-          <input type="text" name="description" />
+        <div className="form-group">
+          <label>Description</label>
+          <input type="text" className="form-control" name="description" />
         </div>
-        <div>
-          <div>Photo</div>
-          <input type="text" name="photo" />
+        <div className="form-group">
+          <label>Photo</label>
+          <input type="text" className="form-control" name="photo" />
         </div>
-        <button>Submit</button>
+        <button className="btn btn-primary">Submit</button>
       </form>
     );
   }
