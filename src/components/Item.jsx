@@ -14,12 +14,15 @@ const Item = props => {
           <p className="card-text">{props.description}</p>
         </div>
         <div className="card-footer">
-          <button className="btn btn-sm btn-warning" onClick={props.handleEdit}>
+          <button
+            className="btn btn-sm btn-warning"
+            onClick={() => props.handleEdit(props.id)}
+          >
             Edit{" "}
           </button>{" "}
           <button
             className="btn btn-sm btn-danger"
-            onClick={props.handleDelete}
+            onClick={() => props.handleDelete(props.id)}
           >
             Delete
           </button>

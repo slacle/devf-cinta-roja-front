@@ -16,7 +16,9 @@ class App extends Component {
     axios
       .get("https://devf-cinta-roja.herokuapp.com/api/v1/get/items")
       .then(response => {
-        this.setState({ items: response.data });
+        if (response.data.length > 0) {
+          this.setState({ items: response.data });
+        }
       })
       .catch(error => {
         console.log(error);
@@ -47,12 +49,18 @@ class App extends Component {
     e.target[2].value = "";
   };
 
-  handleEdit = e => {
-    console.log(e.target);
+  handleEdit = id => {
+    console.log(id);
   };
 
-  handleDelete = e => {
-    console.log(e.target);
+  handleDelete = id => {
+    axios
+      .delete(`https://devf-cinta-roja.herokuapp.com/api/v1/delete/item/${id}`)
+      .then(res => console.log(res.data));
+
+    this.setState({
+      items: this.state.items.filter(item => item._id !== id)
+    });
   };
 
   render() {
@@ -64,7 +72,7 @@ class App extends Component {
             <Main
               handleSubmit={this.handleSubmit}
               handleEdit={this.handleEdit}
-              handleDelete={this.handleEdit}
+              handleDelete={this.handleDelete}
               items={this.state.items}
             />
           </div>
