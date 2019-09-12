@@ -1,21 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Item extends Component {
-  render() {
-    return (
-      <div className="card col-3">
-        <img
-          src={`https://picsum.photos/id/${this.props.photo}/300/300`}
-          className="card-img-top"
-          alt="{this.props.name}"
-        ></img>
-        <div className="card-body">
-          <h5 className="card-title">Name: {this.props.name}</h5>
-          <p className="card-text">Description: {this.props.description}</p>
-        </div>
+const Item = props => {
+  return (
+    <div className="card p-0 col-4">
+      <img
+        src={`https://picsum.photos/id/${props.photo}/300/300`}
+        className="card-img-top"
+        alt="{props.name}"
+      ></img>
+      <div className="card-body">
+        <h5 className="card-title">{props.name}</h5>
+        <p className="card-text">{props.description}</p>
       </div>
-    );
-  }
-}
+      <div className="card-footer text-align-center">
+        <button className="btn btn-sm btn-warning" onClick={props.handleEdit}>
+          Edit{" "}
+        </button>{" "}
+        <button className="btn btn-sm btn-danger" onClick={props.handleDelete}>
+          Delete
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default Item;

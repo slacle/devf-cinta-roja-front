@@ -1,23 +1,23 @@
 import React from "react";
 
-const Item = props => {
+const Form = props => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={props.handleSubmit} className="col-3">
+      <div className="form-group">
+        <label>Photo</label>
+        <input type="number" className="form-control" name="photo" />
+      </div>
       <div className="form-group">
         <label>Name</label>
         <input type="text" className="form-control" name="name" />
       </div>
       <div className="form-group">
         <label>Description</label>
-        <input type="text" className="form-control" name="description" />
-      </div>
-      <div className="form-group">
-        <label>Photo</label>
-        <input type="text" className="form-control" name="photo" />
+        <textarea className="form-control" name="description"></textarea>
       </div>
       <button className="btn btn-primary">Submit</button>
     </form>
   );
 };
 
-export default Item;
+export default Form;
