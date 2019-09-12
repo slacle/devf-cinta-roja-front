@@ -66,7 +66,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <Nav />
+        <Nav items={this.state.items} />
         <div className="App">
           <div className="container mt-5">
             <Main
