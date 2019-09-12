@@ -34,19 +34,26 @@ class App extends Component {
       description: e.target[2].value
     };
 
-    axios
-      .post("https://devf-cinta-roja.herokuapp.com/api/v1/create/item", newItem)
-      .then(res => console.log(res.data));
+    if (newItem.photo && newItem.title && newItem.description) {
+      axios
+        .post(
+          "https://devf-cinta-roja.herokuapp.com/api/v1/create/item",
+          newItem
+        )
+        .then(res =>
+          this.setState(prevState => {
+            return {
+              items: [...prevState.items, res.data]
+            };
+          })
+        );
 
-    this.setState(prevState => {
-      return {
-        items: [...prevState.items, newItem]
-      };
-    });
-
-    e.target[0].value = "";
-    e.target[1].value = "";
-    e.target[2].value = "";
+      e.target[0].value = "";
+      e.target[1].value = "";
+      e.target[2].value = "";
+    } else {
+      console.log("All fields are required.");
+    }
   };
 
   handleEdit = id => {
@@ -65,19 +72,17 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <div className="App">
         <Nav items={this.state.items} />
-        <div className="App">
-          <div className="container mt-5">
-            <Main
-              handleSubmit={this.handleSubmit}
-              handleEdit={this.handleEdit}
-              handleDelete={this.handleDelete}
-              items={this.state.items}
-            />
-          </div>
+        <div className="container mt-5">
+          <Main
+            handleSubmit={this.handleSubmit}
+            handleEdit={this.handleEdit}
+            handleDelete={this.handleDelete}
+            items={this.state.items}
+          />
         </div>
-      </>
+      </div>
     );
   }
 }
