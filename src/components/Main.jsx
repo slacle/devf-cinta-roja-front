@@ -13,7 +13,7 @@ class Main extends Component {
               return (
                 <Item
                   key={i}
-                  name={item.name}
+                  title={item.title}
                   description={item.description}
                   photo={item.photo}
                   handleEdit={this.props.handleEdit}

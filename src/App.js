@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Main from "./components/Main";
 
@@ -10,14 +11,29 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    axios
+      .get("https://devf-cinta-roja.herokuapp.com/api/v1/get/items")
+      .then(response => {
+        this.setState({ items: response.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   handleSubmit = e => {
     e.preventDefault();
 
     const newItem = {
-      name: e.target[0].value,
-      description: e.target[1].value,
-      photo: e.target[2].value
+      photo: e.target[0].value,
+      title: e.target[1].value,
+      description: e.target[2].value
     };
+
+    axios
+      .post("https://devf-cinta-roja.herokuapp.com/api/v1/create/item", newItem)
+      .then(res => console.log(res.data));
 
     this.setState(prevState => {
       return {
