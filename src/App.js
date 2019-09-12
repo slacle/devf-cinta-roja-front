@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Nav from "./components/Nav";
 import Main from "./components/Main";
 
 class App extends Component {
@@ -56,16 +57,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="container mt-5">
-          <Main
-            handleSubmit={this.handleSubmit}
-            handleEdit={this.handleEdit}
-            handleDelete={this.handleEdit}
-            items={this.state.items}
-          />
+      <>
+        <Nav />
+        <div className="App">
+          <div className="container mt-5">
+            <Main
+              handleSubmit={this.handleSubmit}
+              handleEdit={this.handleEdit}
+              handleDelete={this.handleEdit}
+              items={this.state.items}
+            />
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

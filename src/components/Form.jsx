@@ -2,7 +2,10 @@ import React from "react";
 
 const Form = props => {
   return (
-    <form onSubmit={props.handleSubmit} className="col-3">
+    <form
+      onSubmit={props.handleSubmit}
+      className="mb-5 col-sm-6 col-md-4 col-lg-3"
+    >
       <div className="form-group">
         <label>Photo</label>
         <input type="number" className="form-control" name="photo" />

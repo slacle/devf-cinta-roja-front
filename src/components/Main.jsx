@@ -7,8 +7,8 @@ class Main extends Component {
     return (
       <div className="row">
         <Form handleSubmit={this.props.handleSubmit} />
-        <div className="col-9">
-          <div className="card-deck row">
+        <div className="col-sm-6 col-md-8 col-lg-9">
+          <div className="row">
             {this.props.items.map((item, i) => {
               return (
                 <Item
