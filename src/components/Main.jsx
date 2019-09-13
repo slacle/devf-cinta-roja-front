@@ -17,7 +17,7 @@ class Main extends Component {
                   title={item.title}
                   description={item.description}
                   photo={item.photo}
-                  handleEdit={this.props.handleEdit}
+                  handleSave={this.props.handleSave}
                   handleDelete={this.props.handleDelete}
                 />
               );

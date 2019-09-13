@@ -7,7 +7,7 @@ const Form = props => {
       className="mb-5 col-sm-6 col-md-4 col-lg-3"
     >
       <div className="form-group">
-        <label>Photo</label>
+        <label>Photo ID</label>
         <input type="number" className="form-control" name="photo" />
       </div>
       <div className="form-group">

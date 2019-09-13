@@ -56,8 +56,25 @@ class App extends Component {
     }
   };
 
-  handleEdit = id => {
-    console.log(id);
+  handleSave = changedItem => {
+    axios
+      .put(
+        `https://devf-cinta-roja.herokuapp.com/api/v1/modify/item/${changedItem.id}`,
+        changedItem.data
+      )
+      .then(res => {
+        return axios.get(
+          "https://devf-cinta-roja.herokuapp.com/api/v1/get/items"
+        );
+      })
+      .then(response => {
+        if (response.data.length > 0) {
+          this.setState({ items: response.data });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   handleDelete = id => {
@@ -77,7 +94,7 @@ class App extends Component {
         <div className="container mt-5">
           <Main
             handleSubmit={this.handleSubmit}
-            handleEdit={this.handleEdit}
+            handleSave={this.handleSave}
             handleDelete={this.handleDelete}
             items={this.state.items}
           />
