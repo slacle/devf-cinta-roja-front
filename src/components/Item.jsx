@@ -1,70 +1,107 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Item extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      data: {
+        photo: this.props.photo,
+        title: this.props.title,
+        description: this.props.description
+      },
+      editedData: {
+        photo: this.props.photo,
+        title: this.props.title,
+        description: this.props.description
+      },
       editingItem: false
     };
   }
 
-  handleEditingItem = () => {
+  switchEditMode = () => {
     this.setState(previousState => ({
       editingItem: !previousState.editingItem
     }));
   };
 
-  handleEdit = e => {
+  changingPhoto = e => {
+    this.setState({
+      editedData: { ...this.state.editedData, photo: e.target.value }
+    });
+  };
+
+  changingTitle = e => {
+    this.setState({
+      editedData: { ...this.state.editedData, title: e.target.value }
+    });
+  };
+
+  changingDescription = e => {
+    this.setState({
+      editedData: { ...this.state.editedData, description: e.target.value }
+    });
+  };
+
+  saveEdit = e => {
     e.preventDefault();
 
-    const changedItem = {
-      id: this.props.id,
+    this.setState({
       data: {
-        photo: e.target[0].value || this.props.photo,
-        title: e.target[1].value || this.props.title,
-        description: e.target[2].value || this.props.description
+        photo: this.state.editedData.photo,
+        title: this.state.editedData.title,
+        description: this.state.editedData.description
       }
-    };
+    });
 
-    this.props.handleSave(changedItem);
+    axios
+      .put(
+        `https://devf-cinta-roja.herokuapp.com/api/v1/modify/item/${this.props.id}`,
+        this.state.editedData
+      )
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
 
-    this.setState(previousState => ({
-      editingItem: !previousState.editingItem
-    }));
+    this.switchEditMode();
   };
 
   render() {
     if (this.state.editingItem) {
       return (
         <div className="mb-5 col-6 col-sm-12 col-md-6 col-lg-4">
-          <form className="card" onSubmit={this.handleEdit}>
+          <form className="card" onSubmit={this.saveEdit}>
             <img
-              style={{ opacity: "0.3" }}
-              src={`https://picsum.photos/id/${this.props.photo}/300/300`}
+              style={{ opacity: "0.5" }}
+              src={`https://picsum.photos/id/${this.state.editedData.photo}/300/300`}
               className="card-img-top"
-              alt="{this.props.title}"
+              alt="{this.state.editedData.title}"
             />
             <div className="card-body">
               <input
                 type="number"
+                min="0"
+                max="1084"
                 className="form-control mb-3"
                 name="photo"
-                placeholder={this.props.photo}
+                value={this.state.editedData.photo}
+                onChange={this.changingPhoto}
               />
               <input
                 type="text"
                 className="card-title"
-                placeholder={this.props.title}
+                value={this.state.editedData.title}
+                onChange={this.changingTitle}
               />
               <textarea
                 className="card-text"
-                placeholder={this.props.description}
+                value={this.state.editedData.description}
+                onChange={this.changingDescription}
               ></textarea>
             </div>
             <div className="card-footer">
               <button
                 className="btn btn-sm btn-warning"
-                onClick={this.handleEditingItem}
+                onClick={this.switchEditMode}
               >
                 Cancel{" "}
               </button>{" "}
@@ -80,18 +117,18 @@ class Item extends Component {
         <div className="mb-5 col-6 col-sm-12 col-md-6 col-lg-4">
           <div className="card">
             <img
-              src={`https://picsum.photos/id/${this.props.photo}/300/300`}
+              src={`https://picsum.photos/id/${this.state.data.photo}/300/300`}
               className="card-img-top"
-              alt="{this.props.title}"
+              alt="{this.state.data.title}"
             />
             <div className="card-body">
-              <h5 className="card-title">{this.props.title}</h5>
-              <p className="card-text">{this.props.description}</p>
+              <h5 className="card-title">{this.state.data.title}</h5>
+              <p className="card-text">{this.state.data.description}</p>
             </div>
             <div className="card-footer">
               <button
                 className="btn btn-sm btn-warning"
-                onClick={this.handleEditingItem}
+                onClick={this.switchEditMode}
               >
                 Edit{" "}
               </button>{" "}

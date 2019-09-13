@@ -4,11 +4,17 @@ const Form = props => {
   return (
     <form
       onSubmit={props.handleSubmit}
-      className="mb-5 col-sm-6 col-md-4 col-lg-3"
+      className="mb-5 pr-sm-5 col-sm-6 col-md-4 col-lg-3"
     >
       <div className="form-group">
         <label>Photo ID</label>
-        <input type="number" className="form-control" name="photo" />
+        <input
+          type="number"
+          min="0"
+          max="1084"
+          className="form-control"
+          name="photo"
+        />
       </div>
       <div className="form-group">
         <label>Name</label>
