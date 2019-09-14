@@ -71,10 +71,10 @@ class Item extends Component {
         <div className="mb-5 col-6 col-sm-12 col-md-6 col-lg-4">
           <form className="card" onSubmit={this.saveEdit}>
             <img
-              style={{ opacity: "0.5" }}
+              style={{ opacity: "0.75" }}
               src={`https://picsum.photos/id/${this.state.editedData.photo}/300/300`}
               className="card-img-top"
-              alt="{this.state.editedData.title}"
+              alt={this.state.editedData.title}
             />
             <div className="card-body">
               <input
@@ -119,7 +119,7 @@ class Item extends Component {
             <img
               src={`https://picsum.photos/id/${this.state.data.photo}/300/300`}
               className="card-img-top"
-              alt="{this.state.data.title}"
+              alt={this.state.data.title}
             />
             <div className="card-body">
               <h5 className="card-title">{this.state.data.title}</h5>
