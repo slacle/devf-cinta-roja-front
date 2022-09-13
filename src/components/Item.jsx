@@ -8,59 +8,59 @@ class Item extends Component {
       data: {
         photo: this.props.photo,
         title: this.props.title,
-        description: this.props.description
+        description: this.props.description,
       },
       editedData: {
         photo: this.props.photo,
         title: this.props.title,
-        description: this.props.description
+        description: this.props.description,
       },
-      editingItem: false
+      editingItem: false,
     };
   }
 
   switchEditMode = () => {
-    this.setState(previousState => ({
-      editingItem: !previousState.editingItem
+    this.setState((previousState) => ({
+      editingItem: !previousState.editingItem,
     }));
   };
 
-  changingPhoto = e => {
+  changingPhoto = (e) => {
     this.setState({
-      editedData: { ...this.state.editedData, photo: e.target.value }
+      editedData: { ...this.state.editedData, photo: e.target.value },
     });
   };
 
-  changingTitle = e => {
+  changingTitle = (e) => {
     this.setState({
-      editedData: { ...this.state.editedData, title: e.target.value }
+      editedData: { ...this.state.editedData, title: e.target.value },
     });
   };
 
-  changingDescription = e => {
+  changingDescription = (e) => {
     this.setState({
-      editedData: { ...this.state.editedData, description: e.target.value }
+      editedData: { ...this.state.editedData, description: e.target.value },
     });
   };
 
-  saveEdit = e => {
+  saveEdit = (e) => {
     e.preventDefault();
 
     this.setState({
       data: {
         photo: this.state.editedData.photo,
         title: this.state.editedData.title,
-        description: this.state.editedData.description
-      }
+        description: this.state.editedData.description,
+      },
     });
 
     axios
       .put(
-        `https://devf-cinta-roja.herokuapp.com/api/v1/modify/item/${this.props.id}`,
+        `https://devf-cinta-roja-back.onrender.com/api/v1/modify/item/${this.props.id}`,
         this.state.editedData
       )
-      .then(res => console.log(res))
-      .catch(error => console.log(error));
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
 
     this.switchEditMode();
   };

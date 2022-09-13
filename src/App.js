@@ -8,42 +8,42 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
     };
   }
 
   componentDidMount() {
     axios
-      .get("https://devf-cinta-roja.herokuapp.com/api/v1/get/items")
-      .then(response => {
+      .get("https://devf-cinta-roja-back.onrender.com/api/v1/get/items")
+      .then((response) => {
         if (response.data.length > 0) {
           this.setState({ items: response.data });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     const newItem = {
       photo: e.target[0].value,
       title: e.target[1].value,
-      description: e.target[2].value
+      description: e.target[2].value,
     };
 
     if (newItem.photo && newItem.title && newItem.description) {
       axios
         .post(
-          "https://devf-cinta-roja.herokuapp.com/api/v1/create/item",
+          "https://devf-cinta-roja-back.onrender.com/api/v1/create/item",
           newItem
         )
-        .then(res =>
-          this.setState(prevState => {
+        .then((res) =>
+          this.setState((prevState) => {
             return {
-              items: [...prevState.items, res.data]
+              items: [...prevState.items, res.data],
             };
           })
         );
@@ -56,13 +56,15 @@ class App extends Component {
     }
   };
 
-  handleDelete = id => {
+  handleDelete = (id) => {
     axios
-      .delete(`https://devf-cinta-roja.herokuapp.com/api/v1/delete/item/${id}`)
-      .then(res => console.log(res.data));
+      .delete(
+        `https://devf-cinta-roja-back.onrender.com/api/v1/delete/item/${id}`
+      )
+      .then((res) => console.log(res.data));
 
     this.setState({
-      items: this.state.items.filter(item => item._id !== id)
+      items: this.state.items.filter((item) => item._id !== id),
     });
   };
 
