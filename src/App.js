@@ -9,6 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       items: [],
+      isLoading: true,
     };
   }
 
@@ -17,7 +18,7 @@ class App extends Component {
       .get("https://devf-cinta-roja-back.onrender.com/api/v1/get/items")
       .then((response) => {
         if (response.data.length > 0) {
-          this.setState({ items: response.data });
+          this.setState({ items: response.data, isLoading: false });
         }
       })
       .catch((error) => {
@@ -77,6 +78,7 @@ class App extends Component {
             handleSubmit={this.handleSubmit}
             handleDelete={this.handleDelete}
             items={this.state.items}
+            isLoading={this.state.isLoading}
           />
         </div>
       </div>

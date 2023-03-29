@@ -9,18 +9,27 @@ class Main extends Component {
         <Form handleSubmit={this.props.handleSubmit} />
         <div className="col-sm-6 col-md-8 col-lg-9">
           <div className="row">
-            {this.props.items.map(item => {
-              return (
-                <Item
-                  key={item._id}
-                  id={item._id}
-                  title={item.title}
-                  description={item.description}
-                  photo={item.photo}
-                  handleDelete={this.props.handleDelete}
-                />
-              );
-            })}
+            {this.props.isLoading ? (
+              <div className="p-5">
+                <p>Loading...</p>
+                <small>
+                  The backend server may take a little moment to start.
+                </small>
+              </div>
+            ) : (
+              this.props.items.map((item) => {
+                return (
+                  <Item
+                    key={item._id}
+                    id={item._id}
+                    title={item.title}
+                    description={item.description}
+                    photo={item.photo}
+                    handleDelete={this.props.handleDelete}
+                  />
+                );
+              })
+            )}
           </div>
         </div>
       </div>
