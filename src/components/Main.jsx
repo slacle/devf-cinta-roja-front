@@ -6,7 +6,10 @@ class Main extends Component {
   render() {
     return (
       <div className="row">
-        <Form handleSubmit={this.props.handleSubmit} />
+        <Form
+          handleSubmit={this.props.handleSubmit}
+          fieldEmpty={this.props.fieldEmpty}
+        />
         <div className="col-sm-6 col-md-8 col-lg-9">
           <div className="row">
             {this.props.isLoading ? (

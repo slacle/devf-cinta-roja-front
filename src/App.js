@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       items: [],
       isLoading: true,
+      fieldEmpty: false,
     };
   }
 
@@ -43,6 +44,7 @@ class App extends Component {
           this.setState((prevState) => {
             return {
               items: [...prevState.items, res.data],
+              fieldEmpty: false,
             };
           })
         );
@@ -51,6 +53,7 @@ class App extends Component {
       e.target[1].value = "";
       e.target[2].value = "";
     } else {
+      this.setState({ fieldEmpty: true });
       console.log("All fields are required.");
     }
   };
@@ -77,6 +80,7 @@ class App extends Component {
             handleDelete={this.handleDelete}
             items={this.state.items}
             isLoading={this.state.isLoading}
+            fieldEmpty={this.state.fieldEmpty}
           />
         </div>
       </div>

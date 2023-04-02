@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = props => {
+const Form = (props) => {
   return (
     <form
       onSubmit={props.handleSubmit}
@@ -25,6 +25,11 @@ const Form = props => {
         <textarea className="form-control" name="description"></textarea>
       </div>
       <button className="btn btn-primary">Submit</button>
+      {props.fieldEmpty && (
+        <div className="alert alert-danger py-1 mt-4" role="alert">
+          All fields are required.
+        </div>
+      )}
     </form>
   );
 };

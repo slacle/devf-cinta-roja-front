@@ -16,6 +16,7 @@ class Item extends Component {
         description: this.props.description,
       },
       editingItem: false,
+      emptyField: false,
     };
   }
 
@@ -46,23 +47,32 @@ class Item extends Component {
   saveEdit = (e) => {
     e.preventDefault();
 
-    this.setState({
-      data: {
-        photo: this.state.editedData.photo,
-        title: this.state.editedData.title,
-        description: this.state.editedData.description,
-      },
-    });
+    if (
+      this.state.editedData.photo &&
+      this.state.editedData.title &&
+      this.state.editedData.description
+    ) {
+      this.setState({
+        data: {
+          photo: this.state.editedData.photo,
+          title: this.state.editedData.title,
+          description: this.state.editedData.description,
+        },
+        emptyField: false,
+      });
 
-    axios
-      .put(
-        `https://devf-cinta-roja-back.onrender.com/api/v1/modify/item/${this.props.id}`,
-        this.state.editedData
-      )
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
+      axios
+        .put(
+          `https://devf-cinta-roja-back.onrender.com/api/v1/modify/item/${this.props.id}`,
+          this.state.editedData
+        )
+        .then((res) => console.log(res))
+        .catch((error) => console.log(error));
 
-    this.switchEditMode();
+      this.switchEditMode();
+    } else {
+      this.setState({ emptyField: true });
+    }
   };
 
   render() {
@@ -110,6 +120,11 @@ class Item extends Component {
               </button>
             </div>
           </form>
+          {this.state.emptyField && (
+            <div className="alert alert-danger py-1 mt-4" role="alert">
+              All fields are required.
+            </div>
+          )}
         </div>
       );
     } else {
