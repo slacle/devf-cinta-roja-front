@@ -13,10 +13,11 @@ class Main extends Component {
               <div className="p-5">
                 <p>Loading...</p>
                 <small>
-                  The backend server may take a little moment to start.
+                  The backend of this demo app is running on a free hosting
+                  service and takes about 30 seconds to start up.
                 </small>
               </div>
-            ) : (
+            ) : this.props.items.length > 0 ? (
               this.props.items.map((item) => {
                 return (
                   <Item
@@ -29,6 +30,12 @@ class Main extends Component {
                   />
                 );
               })
+            ) : (
+              <div className="p-5">
+                <p>
+                  No items currently in the database. Feel free to add some!
+                </p>
+              </div>
             )}
           </div>
         </div>

@@ -17,9 +17,7 @@ class App extends Component {
     axios
       .get("https://devf-cinta-roja-back.onrender.com/api/v1/get/items")
       .then((response) => {
-        if (response.data.length > 0) {
-          this.setState({ items: response.data, isLoading: false });
-        }
+        this.setState({ items: response.data, isLoading: false });
       })
       .catch((error) => {
         console.log(error);
